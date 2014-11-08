@@ -6,7 +6,11 @@ class Dni
 {
     const LENGTH = 9;
 
+    /**
+     * @var string
+     */
     private $code;
+
     private static $letters = array(
         "T", "R", "W", "A", "G", "M",
         "Y", "F", "P", "D", "X", "B",
@@ -51,11 +55,11 @@ class Dni
         if ($this->isEmptyCode()) {
             return false;
         }
-        $expectedLength = 8;
+        $expectedLength = self::LENGTH - 1;
         if ($this->isLastCharAlpha()) {
-            $expectedLength = 9;
+            $expectedLength += 1;
         }
-        $this->setCode(str_pad($this->getCode(), $expectedLength, "0" ,STR_PAD_LEFT));
+        $this->setCode(str_pad($this->getCode(), $expectedLength, "0", STR_PAD_LEFT));
 
         return true;
     }
