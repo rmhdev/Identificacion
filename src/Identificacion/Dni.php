@@ -13,7 +13,8 @@ class Dni
 
     private function setCode($code)
     {
-        $this->code = strtoupper($code);
+        $cleaned = preg_replace('/\s+/', '', $code);
+        $this->code = strtoupper($cleaned);
     }
 
     private function getCode()
