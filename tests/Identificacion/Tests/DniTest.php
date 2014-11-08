@@ -80,4 +80,13 @@ class DniTests extends \PHPUnit_Framework_TestCase
             array("00045R78", "45r78"),
         );
     }
+
+
+    public function testCreateCorrectDniMustReturnDni()
+    {
+        $dni = Dni::create("12345678z");
+
+        $this->assertInstanceOf('Identificacion\Dni', $dni);
+        $this->assertTrue($dni->isValid());
+    }
 }

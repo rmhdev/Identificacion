@@ -133,4 +133,9 @@ class Dni
 
         return substr($this->getCode(), 0, $expectedLength);
     }
+
+    public static function create($code)
+    {
+        return new Dni($code);
+    }
 }
