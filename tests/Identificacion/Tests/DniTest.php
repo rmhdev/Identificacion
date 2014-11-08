@@ -81,6 +81,27 @@ class DniTests extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @dataProvider getLetterFromDniProvider
+     * @param string $expected
+     * @param string $code
+     */
+    public function testGetLetterFromDniMustReturnLetter($expected, $code)
+    {
+        $dni = new Dni($code);
+
+        $this->assertEquals($expected, $dni->getLetter());
+    }
+
+    public function getLetterFromDniProvider()
+    {
+        return array(
+            array("Z"   , "12345678Z"),
+            array("Z"   , "12345678z"),
+            array(""    , "123456781"),
+        );
+    }
+
 
     public function testCreateCorrectDniMustReturnDni()
     {

@@ -79,7 +79,7 @@ class Dni
         if (!$this->hasCorrectLength() || !$this->isLastCharAlpha()) {
             return false;
         }
-        $lastChar = $this->stripLetter();
+        $lastChar = $this->getLetter();
         $expectedChar = $this->expectedLastChar();
 
         return ($lastChar === $expectedChar);
@@ -90,7 +90,7 @@ class Dni
         return (strlen($this->getCode()) == self::LENGTH);
     }
 
-    private function stripLetter()
+    public function getLetter()
     {
         if ($this->isLastCharAlpha()) {
             $code = $this->getCode();
