@@ -8,7 +8,12 @@ class Dni
 
     public function __construct($code = null)
     {
-        $this->code = $code;
+        $this->code = (string) $code;
+    }
+
+    public function __toString()
+    {
+        return $this->code;
     }
 
     public function isValid()
