@@ -46,6 +46,8 @@ class DniTests extends \PHPUnit_Framework_TestCase
             array("12345678Z", "12345678z"),
             array("12345678Z", "12345678 z"),
             array("12345678Z", "12345678\nz"),
+            array("12345678Z", "12345678-z"),
+            array("12345678Z", "\t1.2.3_4-5/6.7.8.zñ"),
         );
     }
 }
