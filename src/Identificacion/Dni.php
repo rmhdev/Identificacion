@@ -4,7 +4,15 @@ namespace Identificacion;
 
 class Dni
 {
+    const LENGTH = 9;
+
     private $code;
+    private static $letters = array(
+        "T", "R", "W", "A", "G", "M",
+        "Y", "F", "P", "D", "X", "B",
+        "N", "J", "Z", "S", "Q", "V",
+        "H", "L", "C", "K", "E"
+    );
 
     public function __construct($code = null)
     {
@@ -29,6 +37,27 @@ class Dni
 
     public function isValid()
     {
-        return (strlen($this->getCode()) == 9) ? true : false;
+        if (!$this->hasCorrectLength()) {
+            return false;
+        }
+
+        return true;
     }
+
+    private function hasCorrectLength()
+    {
+        return (strlen($this->getCode()) == self::LENGTH);
+    }
+
+    private function stripNumber()
+    {
+        return (int) substr($this->getCode(), 0, 8);
+    }
+
+    private function stripLetter()
+    {
+        return substr($this->getCode(), 8, 1);
+    }
+
+
 }
