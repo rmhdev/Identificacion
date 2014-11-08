@@ -8,16 +8,26 @@ class Dni
 
     public function __construct($code = null)
     {
-        $this->code = (string) $code;
+        $this->setCode($code);
     }
 
-    public function __toString()
+    private function setCode($code)
+    {
+        $this->code = strtoupper($code);
+    }
+
+    private function getCode()
     {
         return $this->code;
     }
 
+    public function __toString()
+    {
+        return $this->getCode();
+    }
+
     public function isValid()
     {
-        return (strlen($this->code) == 9) ? true : false;
+        return (strlen($this->getCode()) == 9) ? true : false;
     }
 }

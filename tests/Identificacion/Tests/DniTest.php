@@ -43,6 +43,7 @@ class DniTests extends \PHPUnit_Framework_TestCase
     {
         return array(
             array("12345678Z", "12345678Z"),
+            array("12345678Z", "12345678z"),
         );
     }
 }
