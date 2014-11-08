@@ -13,6 +13,6 @@ class Dni
 
     public function isValid()
     {
-        return $this->code ? true : false;
+        return (strlen($this->code) == 9) ? true : false;
     }
 }
