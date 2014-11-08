@@ -27,10 +27,22 @@ class DniTests extends \PHPUnit_Framework_TestCase
         $this->assertFalse($dni->isValid());
     }
 
-    public function testToStringMustReturnCode()
+    /**
+     * @dataProvider getToStringProvider
+     * @param string $expected
+     * @param string $actual
+     */
+    public function testToStringMustReturnCode($expected, $actual)
     {
-        $dni = new Dni("12345678Z");
+        $dni = new Dni($actual);
 
-        $this->assertEquals("12345678Z", $dni->__toString());
+        $this->assertEquals($expected, $dni->__toString());
+    }
+
+    public function getToStringProvider()
+    {
+        return array(
+            array("12345678Z", "12345678Z"),
+        );
     }
 }
