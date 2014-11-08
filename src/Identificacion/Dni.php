@@ -17,7 +17,9 @@ class Dni
     public function __construct($code = null)
     {
         $this->setCode($code);
-        $this->formatCode();
+        if ($this->cleanCode()) {
+            $this->fillCode();
+        }
     }
 
     private function setCode($code)
@@ -25,32 +27,37 @@ class Dni
         $this->code = $code;
     }
 
-    private function formatCode()
+    private function cleanCode()
     {
-        $code = $this->getCode();
-        if (empty($code)) {
+        if ($this->isEmptyCode()) {
             return false;
         }
-        $cleaned = strtoupper(
-            preg_replace('/[^a-zA-Z0-9]/', '', $code)
+        $this->setCode(
+            strtoupper(
+                preg_replace('/[^a-zA-Z0-9]/', '', $this->getCode())
+            )
         );
-        $expectedLength = 8;
-        if (ctype_alpha($code[strlen($code) - 1])) {
-            $expectedLength = 9;
-        }
-        $this->setCode(str_pad($cleaned, $expectedLength, "0" ,STR_PAD_LEFT));
 
         return true;
     }
 
-    private function hasLastLetter()
+    private function isEmptyCode()
     {
-        $code = $this->getCode();
-        if (empty($code)) {
+        return (is_null($this->getCode()) || ($this->getCode() === ""));
+    }
+
+    private function fillCode()
+    {
+        if ($this->isEmptyCode()) {
             return false;
         }
+        $expectedLength = 8;
+        if ($this->isLastCharAlpha()) {
+            $expectedLength = 9;
+        }
+        $this->setCode(str_pad($this->getCode(), $expectedLength, "0" ,STR_PAD_LEFT));
 
-        return !is_int($code[strlen($code) - 1]);
+        return true;
     }
 
     private function getCode()
@@ -77,15 +84,32 @@ class Dni
         return (strlen($this->getCode()) == self::LENGTH);
     }
 
-    private function stripNumber()
-    {
-        return (int) substr($this->getCode(), 0, 8);
-    }
-
     private function stripLetter()
     {
-        return substr($this->getCode(), 8, 1);
+        if ($this->isLastCharAlpha()) {
+            $code = $this->getCode();
+
+            return $code[strlen($code) - 1];
+        }
+
+        return "";
     }
 
+    private function isLastCharAlpha()
+    {
+        if ($this->isEmptyCode()) {
+            return false;
+        }
+        $code = $this->getCode();
+        $lastChar = $code[strlen($code) - 1];
 
+        return ctype_alpha($lastChar);
+    }
+
+    private function stripNumber()
+    {
+        if ($this->isLastCharAlpha()) {
+
+        }
+    }
 }

@@ -6,13 +6,6 @@ use Identificacion\Dni;
 
 class DniTests extends \PHPUnit_Framework_TestCase
 {
-    public function testEmptyDniMustBeInvalid()
-    {
-        $dni = new Dni();
-
-        $this->assertFalse($dni->isValid());
-    }
-
     /**
      * @dataProvider getCorrectDniProvider
      * @param $actual
@@ -46,6 +39,8 @@ class DniTests extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
+            array(""),
+            array("12345678"),
         );
     }
 
@@ -64,6 +59,8 @@ class DniTests extends \PHPUnit_Framework_TestCase
     public function getToStringProvider()
     {
         return array(
+            array("", null),
+            array("", ""),
             array("12345678Z", "12345678Z"),
             array("12345678Z", "12345678z"),
             array("12345678Z", "12345678 z"),
