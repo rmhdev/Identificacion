@@ -80,7 +80,7 @@ class Dni
             return false;
         }
         $lastChar = $this->getLetter();
-        $expectedChar = $this->expectedLastChar();
+        $expectedChar = $this->expectedLetter();
 
         return ($lastChar === $expectedChar);
     }
@@ -112,7 +112,7 @@ class Dni
         return ctype_alpha($lastChar);
     }
 
-    private function expectedLastChar()
+    public function expectedLetter()
     {
         $number = (int) $this->stripNumber();
         $dirtyNumber = (int) preg_replace('/[^0-9]/', 9, $this->stripNumber());

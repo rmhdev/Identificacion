@@ -102,6 +102,28 @@ class DniTests extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @dataProvider getExpectedLetterFromDniProvider
+     * @param string $expected
+     * @param string $code
+     */
+    public function testExpectedLetterFrmDniMustReturnDni($expected, $code)
+    {
+        $dni = new Dni($code);
+
+        $this->assertEquals($expected, $dni->expectedLetter());
+    }
+
+    public function getExpectedLetterFromDniProvider()
+    {
+        return array(
+            array("Z"   , "12345678"),
+            array("Z"   , "12345678Z"),
+            array("Z"   , "12345678a"),
+            array("H"   , "11111111"),
+        );
+    }
+
 
     public function testCreateCorrectDniMustReturnDni()
     {
