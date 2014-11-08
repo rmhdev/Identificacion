@@ -21,6 +21,9 @@ class DniTests extends \PHPUnit_Framework_TestCase
     {
         return array(
             array("12345678z"),
+            array("11111111h"),
+            array("22222222j"),
+            array("00000014z"),
         );
     }
 
@@ -41,6 +44,11 @@ class DniTests extends \PHPUnit_Framework_TestCase
             array(null),
             array(""),
             array("12345678"),
+            array("12345678a"),
+            array("11111111q"),
+            array("111a1111h"),
+            array("14s00000z"),
+            array("0014s000z"),
         );
     }
 

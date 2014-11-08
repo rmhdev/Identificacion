@@ -72,11 +72,13 @@ class Dni
 
     public function isValid()
     {
-        if (!$this->hasCorrectLength()) {
+        if (!$this->hasCorrectLength() || !$this->isLastCharAlpha()) {
             return false;
         }
+        $lastChar = $this->stripLetter();
+        $expectedChar = $this->expectedLastChar();
 
-        return true;
+        return ($lastChar === $expectedChar);
     }
 
     private function hasCorrectLength()
@@ -106,10 +108,25 @@ class Dni
         return ctype_alpha($lastChar);
     }
 
+    private function expectedLastChar()
+    {
+        $number = (int) $this->stripNumber();
+        $dirtyNumber = (int) preg_replace('/[^0-9]/', 9, $this->stripNumber());
+        if ($number != $dirtyNumber) {
+            return "";
+        }
+        $mod = $number % sizeof(self::$letters);
+
+        return self::$letters[$mod];
+    }
+
     private function stripNumber()
     {
+        $expectedLength = self::LENGTH;
         if ($this->isLastCharAlpha()) {
-
+            $expectedLength -= 1;
         }
+
+        return substr($this->getCode(), 0, $expectedLength);
     }
 }
