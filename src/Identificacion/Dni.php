@@ -17,12 +17,40 @@ class Dni
     public function __construct($code = null)
     {
         $this->setCode($code);
+        $this->formatCode();
     }
 
     private function setCode($code)
     {
-        $cleaned = preg_replace('/[^a-zA-Z0-9]/', '', $code);
-        $this->code = strtoupper($cleaned);
+        $this->code = $code;
+    }
+
+    private function formatCode()
+    {
+        $code = $this->getCode();
+        if (empty($code)) {
+            return false;
+        }
+        $cleaned = strtoupper(
+            preg_replace('/[^a-zA-Z0-9]/', '', $code)
+        );
+        $expectedLength = 8;
+        if (ctype_alpha($code[strlen($code) - 1])) {
+            $expectedLength = 9;
+        }
+        $this->setCode(str_pad($cleaned, $expectedLength, "0" ,STR_PAD_LEFT));
+
+        return true;
+    }
+
+    private function hasLastLetter()
+    {
+        $code = $this->getCode();
+        if (empty($code)) {
+            return false;
+        }
+
+        return !is_int($code[strlen($code) - 1]);
     }
 
     private function getCode()

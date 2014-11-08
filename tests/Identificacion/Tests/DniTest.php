@@ -31,11 +31,22 @@ class DniTests extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testIncorrectDniMustBeInvalid()
+    /**
+     * @dataProvider getIncorrectDniProvider
+     * @param $actual
+     */
+    public function testIncorrectDniMustBeInvalid($actual)
     {
-        $dni = new Dni("12345678");
+        $dni = new Dni($actual);
 
         $this->assertFalse($dni->isValid());
+    }
+
+    public function getIncorrectDniProvider()
+    {
+        return array(
+            array(null),
+        );
     }
 
     /**
@@ -59,6 +70,9 @@ class DniTests extends \PHPUnit_Framework_TestCase
             array("12345678Z", "12345678\nz"),
             array("12345678Z", "12345678-z"),
             array("12345678Z", "\t1.2.3_4-5/6.7.8.zñ"),
+            array("00045678Z", "45678z"),
+            array("00045678", "45678"),
+            array("00045R78", "45r78"),
         );
     }
 }
