@@ -13,11 +13,22 @@ class DniTests extends \PHPUnit_Framework_TestCase
         $this->assertFalse($dni->isValid());
     }
 
-    public function testCorrectDniMustBeValid()
+    /**
+     * @dataProvider getCorrectDniProvider
+     * @param $actual
+     */
+    public function testCorrectDniMustBeValid($actual)
     {
-        $dni = new Dni("12345678z");
+        $dni = new Dni($actual);
 
         $this->assertTrue($dni->isValid());
+    }
+
+    public function getCorrectDniProvider()
+    {
+        return array(
+            array("12345678z"),
+        );
     }
 
     public function testIncorrectDniMustBeInvalid()
