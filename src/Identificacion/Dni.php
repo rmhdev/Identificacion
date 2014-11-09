@@ -77,6 +77,9 @@ class Dni implements IdentityInterface
         return $this->getCode();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isValid()
     {
         if (!$this->hasCorrectLength() || !$this->isLastCharAlpha()) {

@@ -6,13 +6,21 @@ class Nie implements IdentityInterface
 {
     private $code;
 
-    public function __construct($code)
+    public function __construct($code = null)
     {
         $this->code = $code;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isValid()
     {
-        return true;
+        return $this->getCode() ? true : false;
+    }
+
+    private function getCode()
+    {
+        return $this->code;
     }
 }

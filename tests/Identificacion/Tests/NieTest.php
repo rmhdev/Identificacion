@@ -12,4 +12,11 @@ class NieTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($nie->isValid());
     }
+
+    public function testIncorrectNieMustBeInvalid()
+    {
+        $nie = new Nie();
+
+        $this->assertFalse($nie->isValid());
+    }
 }
