@@ -2,6 +2,7 @@
 
 namespace Identificacion;
 
+use Identificacion\Exception\LengthException;
 use Identificacion\Exception\ParameterNotFoundException;
 
 class Dni
@@ -139,8 +140,11 @@ class Dni
     public static function create($code)
     {
         $dni = new Dni($code);
-        if ($dni->__toString() === "") {
+        if ("" === $dni->__toString()) {
             throw new ParameterNotFoundException();
+        }
+        if (Dni::LENGTH != strlen($dni->__toString())) {
+            throw new LengthException();
         }
 
         return $dni;
