@@ -2,6 +2,8 @@
 
 namespace Identificacion;
 
+use Identificacion\Exception\ParameterNotFoundException;
+
 class Dni
 {
     const LENGTH = 9;
@@ -28,7 +30,7 @@ class Dni
 
     private function setCode($code)
     {
-        $this->code = $code;
+        $this->code = (string) $code;
     }
 
     private function cleanCode()
@@ -47,7 +49,7 @@ class Dni
 
     private function isEmptyCode()
     {
-        return (is_null($this->getCode()) || ($this->getCode() === ""));
+        return ($this->getCode() === "");
     }
 
     private function fillCode()
@@ -136,6 +138,11 @@ class Dni
 
     public static function create($code)
     {
-        return new Dni($code);
+        $dni = new Dni($code);
+        if ($dni->__toString() === "") {
+            throw new ParameterNotFoundException();
+        }
+
+        return $dni;
     }
 }

@@ -132,4 +132,22 @@ class DniTests extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Identificacion\Dni', $dni);
         $this->assertTrue($dni->isValid());
     }
+
+    /**
+     * @dataProvider emptyDniProvider
+     * @expectedException \Identificacion\Exception\ParameterNotFoundException
+     * @param $code
+     */
+    public function testCreateDniWithEmptyCodeMustThrowException($code)
+    {
+        Dni::create($code);
+    }
+
+    public function emptyDniProvider()
+    {
+        return array(
+            array(null),
+            array(""),
+        );
+    }
 }
