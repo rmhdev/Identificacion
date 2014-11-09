@@ -123,10 +123,22 @@ class DniTests extends \PHPUnit_Framework_TestCase
     public function getExpectedLetterFromDniProvider()
     {
         return array(
-            array("Z"   , "12345678"),
-            array("Z"   , "12345678Z"),
-            array("Z"   , "12345678a"),
-            array("H"   , "11111111"),
+            array("Z", "12345678"),
+            array("Z", "12345678Z"),
+            array("Z", "12345678a"),
+            array("H", "11111111"),
+            array("T", "23000000"), array("R", "23000001"),
+            array("W", "23000002"), array("A", "23000003"),
+            array("G", "23000004"), array("M", "23000005"),
+            array("Y", "23000006"), array("F", "23000007"),
+            array("P", "23000008"), array("D", "23000009"),
+            array("X", "23000010"), array("B", "23000011"),
+            array("N", "23000012"), array("J", "23000013"),
+            array("Z", "23000014"), array("S", "23000015"),
+            array("Q", "23000016"), array("V", "23000017"),
+            array("H", "23000018"), array("L", "23000019"),
+            array("C", "23000020"), array("K", "23000021"),
+            array("E", "23000022"),
         );
     }
 
