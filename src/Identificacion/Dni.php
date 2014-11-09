@@ -2,6 +2,7 @@
 
 namespace Identificacion;
 
+use Identificacion\Exception\InvalidVerificationException;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\ParameterNotFoundException;
 
@@ -143,8 +144,11 @@ class Dni
         if ("" === $dni->__toString()) {
             throw new ParameterNotFoundException();
         }
-        if (Dni::LENGTH != strlen($dni->__toString())) {
+        if (Dni::LENGTH !== strlen($dni->__toString())) {
             throw new LengthException();
+        }
+        if ($dni->expectedLetter() !== $dni->getLetter()) {
+            throw new InvalidVerificationException();
         }
 
         return $dni;

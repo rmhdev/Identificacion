@@ -169,4 +169,23 @@ class DniTests extends \PHPUnit_Framework_TestCase
             array("1234567890"),
         );
     }
+
+    /**
+     * @dataProvider incorrectLetterProvider
+     * @expectedException \Identificacion\Exception\InvalidVerificationException
+     * @param $code
+     */
+    public function testCreateDniWithIncorrectLetterMustThrowException($code)
+    {
+        Dni::create($code);
+    }
+
+    public function incorrectLetterProvider()
+    {
+        return array(
+            array("12345678a"),
+            array("11111111k"),
+            array("00000014a"),
+        );
+    }
 }
