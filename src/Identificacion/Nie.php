@@ -2,7 +2,7 @@
 
 namespace Identificacion;
 
-class Nie
+class Nie implements IdentityInterface
 {
     private $code;
 

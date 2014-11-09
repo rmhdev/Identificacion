@@ -6,7 +6,7 @@ use Identificacion\Exception\InvalidVerificationException;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\ParameterNotFoundException;
 
-class Dni
+class Dni implements IdentityInterface
 {
     const LENGTH = 9;
 
