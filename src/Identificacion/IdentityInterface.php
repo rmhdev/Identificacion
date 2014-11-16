@@ -13,4 +13,9 @@ interface IdentityInterface
      * @return string
      */
     public function checksumLetter();
+
+    /**
+     * @return string
+     */
+    public function expectedChecksumLetter();
 }

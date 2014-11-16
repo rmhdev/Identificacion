@@ -75,9 +75,9 @@ class NieTest extends \PHPUnit_Framework_TestCase
      */
     public function testExpectedChecksumLetterMustReturnLetter($expected, $code)
     {
-        $dni = new Nie($code);
+        $nie = new Nie($code);
 
-        $this->assertEquals($expected, $dni->expectedChecksumLetter());
+        $this->assertEquals($expected, $nie->expectedChecksumLetter());
     }
 
     public function getExpectedChecksumLetterProvider()
