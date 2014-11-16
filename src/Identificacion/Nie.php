@@ -46,4 +46,28 @@ class Nie extends IdentityAbstract implements IdentityInterface
 
         return $raw;
     }
+
+    protected function fillCode()
+    {
+        if ($this->isEmptyCode()) {
+            return false;
+        }
+        $expectedLength = self::LENGTH - 2;
+        if ($this->isLastCharAlpha()) {
+            $expectedLength += 1;
+        }
+        $initialLetter = $this->hasCorrectInitialLetter() ?
+            $this->getInitialLetter() :
+            "";
+        $codeWithoutInitialLetter = substr(
+            $this->getCode(),
+            $this->hasCorrectInitialLetter() ? 1 : 0
+        );
+        $this->setCode(
+            $initialLetter .
+            str_pad($codeWithoutInitialLetter, $expectedLength, "0", STR_PAD_LEFT)
+        );
+
+        return true;
+    }
 }

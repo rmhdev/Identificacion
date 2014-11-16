@@ -42,7 +42,7 @@ abstract class IdentityAbstract implements IdentityInterface
         return true;
     }
 
-    private function fillCode()
+    protected function fillCode()
     {
         if ($this->isEmptyCode()) {
             return false;

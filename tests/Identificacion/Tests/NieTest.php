@@ -121,7 +121,10 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array("X1111111G", "X1111111G"),
             array("X1111111G", "x1111111g"),
             array("Y2345678Z", "\tY\n.2.3_4-5/6.7.8.zñ"),
-            //array("Y0000123Z", "Y123Z"),
+            array("Y0000123Z", "Y123Z"),
+            array("Y0000123Z", "Y123Z"),
+            array("0045R78", "45r78"),
+            array("0000123Z", "123Z"),
         );
     }
 }
