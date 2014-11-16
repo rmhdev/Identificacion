@@ -4,7 +4,7 @@ namespace Identificacion;
 
 class Nie extends IdentityAbstract implements IdentityInterface
 {
-    const INITIAL_LETTERS = "XYZ";
+    private static $initialLetters = array("X", "Y", "Z");
 
     /**
      * {@inheritDoc}
@@ -23,7 +23,12 @@ class Nie extends IdentityAbstract implements IdentityInterface
 
     private function hasCorrectInitialLetter()
     {
-        return !(false === strpos(self::INITIAL_LETTERS, $this->getInitialLetter()));
+        return !(
+            false === array_search(
+                $this->getInitialLetter(),
+                self::$initialLetters
+            )
+        );
     }
 
     private function getInitialLetter()
@@ -40,10 +45,10 @@ class Nie extends IdentityAbstract implements IdentityInterface
     {
         $raw = parent::rawCodeWithoutChecksumLetter();
         if ($this->hasCorrectInitialLetter()) {
-            $raw = strpos(
-                self::INITIAL_LETTERS,
-                $this->getInitialLetter()
-            ) . substr($raw, 1);
+            $raw = array_search(
+                    $this->getInitialLetter(),
+                    self::$initialLetters
+                ) . substr($raw, 1);
         }
 
         return $raw;

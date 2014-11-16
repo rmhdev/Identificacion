@@ -56,6 +56,9 @@ abstract class IdentityAbstract implements IdentityInterface
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function __toString()
     {
         return $this->getCode();
