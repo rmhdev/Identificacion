@@ -130,4 +130,12 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array("0000123Z", "123Z"),
         );
     }
+
+    public function testCreateCorrectNieMustReturnNie()
+    {
+        $nie = Nie::create("X1111111G");
+
+        $this->assertInstanceOf('Identificacion\Nie', $nie);
+        $this->assertTrue($nie->isValid());
+    }
 }

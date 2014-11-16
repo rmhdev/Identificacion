@@ -77,4 +77,9 @@ class Nie extends IdentityAbstract implements IdentityInterface
 
         return true;
     }
+
+    public static function create($code)
+    {
+        return new Nie($code);
+    }
 }
