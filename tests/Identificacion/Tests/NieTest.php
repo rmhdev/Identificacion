@@ -138,4 +138,22 @@ class NieTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Identificacion\Nie', $nie);
         $this->assertTrue($nie->isValid());
     }
+
+    /**
+     * @dataProvider emptyDniProvider
+     * @expectedException \Identificacion\Exception\ParameterNotFoundException
+     * @param $code
+     */
+    public function testCreateNieWithEmptyCodeMustThrowException($code)
+    {
+        Nie::create($code);
+    }
+
+    public function emptyDniProvider()
+    {
+        return array(
+            array(null),
+            array(""),
+        );
+    }
 }

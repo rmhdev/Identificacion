@@ -2,6 +2,8 @@
 
 namespace Identificacion;
 
+use Identificacion\Exception\ParameterNotFoundException;
+
 class Nie extends IdentityAbstract implements IdentityInterface
 {
     private static $initialLetters = array("X", "Y", "Z");
@@ -80,6 +82,11 @@ class Nie extends IdentityAbstract implements IdentityInterface
 
     public static function create($code)
     {
-        return new Nie($code);
+        $nie = new Nie($code);
+        if ("" === $nie->__toString()) {
+            throw new ParameterNotFoundException();
+        }
+
+        return $nie;
     }
 }
