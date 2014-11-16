@@ -45,30 +45,11 @@ class Nie extends IdentityAbstract implements IdentityInterface
         return strtoupper($code[0]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function checksumLetter()
     {
-        if ($this->isLastCharAlpha()) {
-            $code = $this->getCode();
-
-            return $code[strlen($code) - 1];
-        }
-
-        return "";
-    }
-
-    private function isLastCharAlpha()
-    {
-        if ($this->isEmptyCode()) {
-            return false;
-        }
-        $code = $this->getCode();
-        $lastChar = $code[strlen($code) - 1];
-
-        return ctype_alpha($lastChar);
-    }
-
-    private function isEmptyCode()
-    {
-        return ($this->getCode() === "");
+        return $this->getLastLetter();
     }
 }

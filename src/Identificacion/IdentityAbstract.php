@@ -23,4 +23,31 @@ abstract class IdentityAbstract
     {
         return $this->code;
     }
+
+    protected function getLastLetter()
+    {
+        if ($this->isLastCharAlpha()) {
+            $code = $this->getCode();
+
+            return $code[strlen($code) - 1];
+        }
+
+        return "";
+    }
+
+    protected function isLastCharAlpha()
+    {
+        if ($this->isEmptyCode()) {
+            return false;
+        }
+        $code = $this->getCode();
+        $lastChar = $code[strlen($code) - 1];
+
+        return ctype_alpha($lastChar);
+    }
+
+    protected function isEmptyCode()
+    {
+        return ($this->getCode() === "");
+    }
 }
