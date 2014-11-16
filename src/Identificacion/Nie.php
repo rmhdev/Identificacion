@@ -17,7 +17,7 @@ class Nie extends IdentityAbstract implements IdentityInterface
      */
     public function isValid()
     {
-        if (!$this->hasCorrectLength() || !$this->hasCorrectFirstLetter()) {
+        if (!$this->hasCorrectLength() || !$this->hasCorrectInitialLetter()) {
 
             return false;
         }
@@ -30,7 +30,7 @@ class Nie extends IdentityAbstract implements IdentityInterface
         return (strlen($this->getCode()) == self::LENGTH);
     }
 
-    private function hasCorrectFirstLetter()
+    private function hasCorrectInitialLetter()
     {
         return !(false === strpos(self::INITIAL_LETTERS, $this->getInitialLetter()));
     }
