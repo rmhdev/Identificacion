@@ -17,6 +17,45 @@ abstract class IdentityAbstract implements IdentityInterface
         "Q", "V", "H", "L", "C", "K", "E"
     );
 
+    /**
+     * @param string $code
+     */
+    public function __construct($code = "")
+    {
+        $this->setCode($code);
+        if ($this->cleanCode()) {
+            $this->fillCode();
+        }
+    }
+
+    private function cleanCode()
+    {
+        if ($this->isEmptyCode()) {
+            return false;
+        }
+        $this->setCode(
+            strtoupper(
+                preg_replace('/[^a-zA-Z0-9]/', '', $this->getCode())
+            )
+        );
+
+        return true;
+    }
+
+    private function fillCode()
+    {
+        if ($this->isEmptyCode()) {
+            return false;
+        }
+        $expectedLength = self::LENGTH - 1;
+        if ($this->isLastCharAlpha()) {
+            $expectedLength += 1;
+        }
+        $this->setCode(str_pad($this->getCode(), $expectedLength, "0", STR_PAD_LEFT));
+
+        return true;
+    }
+
     public function __toString()
     {
         return $this->getCode();

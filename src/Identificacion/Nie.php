@@ -6,11 +6,6 @@ class Nie extends IdentityAbstract implements IdentityInterface
 {
     const INITIAL_LETTERS = "XYZ";
 
-    public function __construct($code = null)
-    {
-        $this->setCode($code);
-    }
-
     /**
      * {@inheritDoc}
      */

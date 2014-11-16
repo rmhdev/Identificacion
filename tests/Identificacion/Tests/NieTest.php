@@ -100,4 +100,28 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array("E", "X2300022"),
         );
     }
+
+    /**
+     * @dataProvider getToStringProvider
+     * @param string $expected
+     * @param string $actual
+     */
+    public function testToStringMustReturnCode($expected, $actual)
+    {
+        $dni = new Nie($actual);
+
+        $this->assertEquals($expected, $dni->__toString());
+    }
+
+    public function getToStringProvider()
+    {
+        return array(
+            array("", null),
+            array("", ""),
+            array("X1111111G", "X1111111G"),
+            array("X1111111G", "x1111111g"),
+            array("Y2345678Z", "\tY\n.2.3_4-5/6.7.8.zñ"),
+            //array("Y0000123Z", "Y123Z"),
+        );
+    }
 }
