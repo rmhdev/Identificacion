@@ -6,14 +6,9 @@ use Identificacion\Exception\InvalidVerificationException;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\ParameterNotFoundException;
 
-class Dni implements IdentityInterface
+class Dni extends IdentityAbstract implements IdentityInterface
 {
     const LENGTH = 9;
-
-    /**
-     * @var string
-     */
-    private $code;
 
     private static $letters = array(
         "T", "R", "W", "A", "G", "M", "Y", "F",
@@ -27,11 +22,6 @@ class Dni implements IdentityInterface
         if ($this->cleanCode()) {
             $this->fillCode();
         }
-    }
-
-    private function setCode($code)
-    {
-        $this->code = (string) $code;
     }
 
     private function cleanCode()
@@ -65,16 +55,6 @@ class Dni implements IdentityInterface
         $this->setCode(str_pad($this->getCode(), $expectedLength, "0", STR_PAD_LEFT));
 
         return true;
-    }
-
-    private function getCode()
-    {
-        return $this->code;
-    }
-
-    public function __toString()
-    {
-        return $this->getCode();
     }
 
     /**

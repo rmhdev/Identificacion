@@ -2,16 +2,14 @@
 
 namespace Identificacion;
 
-class Nie implements IdentityInterface
+class Nie extends IdentityAbstract implements IdentityInterface
 {
     const LENGTH = 9;
     const INITIAL_LETTERS = "xyz";
 
-    private $code;
-
     public function __construct($code = null)
     {
-        $this->code = $code;
+        $this->setCode($code);
     }
 
     /**
@@ -34,16 +32,16 @@ class Nie implements IdentityInterface
 
     private function hasCorrectFirstLetter()
     {
+        return !(false === strpos(self::INITIAL_LETTERS, $this->getInitialLetter()));
+    }
+
+    private function getInitialLetter()
+    {
         if (!strlen($this->getCode())) {
-            return false;
+            return "";
         }
         $code = $this->getCode();
 
-        return !(false === strpos(self::INITIAL_LETTERS, strtolower($code[0])));
-    }
-
-    private function getCode()
-    {
-        return $this->code;
+        return strtolower($code[0]);
     }
 }
