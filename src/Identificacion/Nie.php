@@ -11,7 +11,9 @@ class Nie extends IdentityAbstract implements IdentityInterface
      */
     public function isValid()
     {
-        if (!$this->hasCorrectLength() || !$this->hasCorrectInitialLetter()) {
+        if (!$this->hasCorrectLength() ||
+            !$this->hasCorrectInitialLetter() ||
+            !$this->isLastCharAlpha()) {
 
             return false;
         }
