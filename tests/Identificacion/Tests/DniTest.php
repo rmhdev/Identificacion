@@ -139,7 +139,7 @@ class DniIdentityTest extends AbstractIdentityTest
     }
 
     /**
-     * @dataProvider incorrectLetterProvider
+     * @dataProvider incorrectChecksumLetterProvider
      * @expectedException \Identificacion\Exception\InvalidChecksumException
      * @param $code
      */
@@ -148,7 +148,7 @@ class DniIdentityTest extends AbstractIdentityTest
         Dni::create($code);
     }
 
-    public function incorrectLetterProvider()
+    public function incorrectChecksumLetterProvider()
     {
         return array(
             array("12345678a"),

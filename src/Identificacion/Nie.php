@@ -5,6 +5,7 @@ namespace Identificacion;
 use Identificacion\Exception\InvalidChecksumException;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\ParameterNotFoundException;
+use Identificacion\Exception\UnexpectedValueException;
 
 class Nie extends IdentityAbstract implements IdentityInterface
 {
@@ -25,7 +26,7 @@ class Nie extends IdentityAbstract implements IdentityInterface
         return ($this->expectedChecksumLetter() === $this->checksumLetter());
     }
 
-    private function hasCorrectInitialLetter()
+    public function hasCorrectInitialLetter()
     {
         return !(
             false === array_search(
@@ -90,6 +91,9 @@ class Nie extends IdentityAbstract implements IdentityInterface
         }
         if (self::LENGTH !== strlen($nie->__toString())) {
             throw new LengthException();
+        }
+        if (!$nie->hasCorrectInitialLetter()) {
+            throw new UnexpectedValueException();
         }
         if ($nie->expectedChecksumLetter() !== $nie->checksumLetter()) {
             throw new InvalidChecksumException();
