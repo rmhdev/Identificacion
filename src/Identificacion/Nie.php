@@ -26,6 +26,9 @@ class Nie extends IdentityAbstract implements IdentityInterface
         return ($this->expectedChecksumLetter() === $this->checksumLetter());
     }
 
+    /**
+     * @return bool
+     */
     public function hasCorrectInitialLetter()
     {
         return !(
@@ -36,7 +39,10 @@ class Nie extends IdentityAbstract implements IdentityInterface
         );
     }
 
-    private function getInitialLetter()
+    /**
+     * @return string
+     */
+    public function getInitialLetter()
     {
         if (!strlen($this->getCode())) {
             return "";
