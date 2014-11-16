@@ -67,4 +67,37 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array(""    , "X11111111"),
         );
     }
+
+    /**
+     * @dataProvider getExpectedChecksumLetterProvider
+     * @param string $expected
+     * @param string $code
+     */
+    public function testExpectedChecksumLetterMustReturnLetter($expected, $code)
+    {
+        $dni = new Nie($code);
+
+        $this->assertEquals($expected, $dni->expectedChecksumLetter());
+    }
+
+    public function getExpectedChecksumLetterProvider()
+    {
+        return array(
+            array("G", "X1111111"),
+            array("H", "Y1111111"),
+            array("D", "Z1111111D"),
+            array("T", "X2300000"), array("R", "X2300001"),
+            array("W", "X2300002"), array("A", "X2300003"),
+            array("G", "X2300004"), array("M", "X2300005"),
+            array("Y", "X2300006"), array("F", "X2300007"),
+            array("P", "X2300008"), array("D", "X2300009"),
+            array("X", "X2300010"), array("B", "X2300011"),
+            array("N", "X2300012"), array("J", "X2300013"),
+            array("Z", "X2300014"), array("S", "X2300015"),
+            array("Q", "X2300016"), array("V", "X2300017"),
+            array("H", "X2300018"), array("L", "X2300019"),
+            array("C", "X2300020"), array("K", "X2300021"),
+            array("E", "X2300022"),
+        );
+    }
 }

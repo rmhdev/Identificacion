@@ -8,14 +8,6 @@ use Identificacion\Exception\ParameterNotFoundException;
 
 class Dni extends IdentityAbstract implements IdentityInterface
 {
-    const LENGTH = 9;
-
-    private static $letters = array(
-        "T", "R", "W", "A", "G", "M", "Y", "F",
-        "P", "D", "X", "B", "N", "J", "Z", "S",
-        "Q", "V", "H", "L", "C", "K", "E"
-    );
-
     public function __construct($code = null)
     {
         $this->setCode($code);
@@ -64,45 +56,6 @@ class Dni extends IdentityAbstract implements IdentityInterface
         $expectedChar = $this->expectedChecksumLetter();
 
         return ($lastChar === $expectedChar);
-    }
-
-    private function hasCorrectLength()
-    {
-        return (strlen($this->getCode()) == self::LENGTH);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function checksumLetter()
-    {
-        if ($this->isLastCharAlpha()) {
-            return $this->getLastLetter();
-        }
-
-        return "";
-    }
-
-    public function expectedChecksumLetter()
-    {
-        $number = (int) $this->stripNumber();
-        $dirtyNumber = (int) preg_replace('/[^0-9]/', 9, $this->stripNumber());
-        if ($number != $dirtyNumber) {
-            return "";
-        }
-        $mod = $number % sizeof(self::$letters);
-
-        return self::$letters[$mod];
-    }
-
-    private function stripNumber()
-    {
-        $expectedLength = self::LENGTH;
-        if ($this->isLastCharAlpha()) {
-            $expectedLength -= 1;
-        }
-
-        return substr($this->getCode(), 0, $expectedLength);
     }
 
     public static function create($code)
