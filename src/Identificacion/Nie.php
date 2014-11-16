@@ -2,6 +2,7 @@
 
 namespace Identificacion;
 
+use Identificacion\Exception\LengthException;
 use Identificacion\Exception\ParameterNotFoundException;
 
 class Nie extends IdentityAbstract implements IdentityInterface
@@ -85,6 +86,9 @@ class Nie extends IdentityAbstract implements IdentityInterface
         $nie = new Nie($code);
         if ("" === $nie->__toString()) {
             throw new ParameterNotFoundException();
+        }
+        if (self::LENGTH !== strlen($nie->__toString())) {
+            throw new LengthException();
         }
 
         return $nie;

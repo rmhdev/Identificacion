@@ -156,4 +156,23 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array(""),
         );
     }
+
+    /**
+     * @dataProvider incorrectLengthProvider
+     * @expectedException \Identificacion\Exception\LengthException
+     * @param $code
+     */
+    public function testCreateNieWithIncorrectLengthMustThrowException($code)
+    {
+        Nie::create($code);
+    }
+
+    public function incorrectLengthProvider()
+    {
+        return array(
+            array("1"),
+            array("12345678"),
+            array("123456789X"),
+        );
+    }
 }
