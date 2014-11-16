@@ -16,10 +16,8 @@ class Dni extends IdentityAbstract implements IdentityInterface
         if (!$this->hasCorrectLength() || !$this->isLastCharAlpha()) {
             return false;
         }
-        $lastChar = $this->checksumLetter();
-        $expectedChar = $this->expectedChecksumLetter();
 
-        return ($lastChar === $expectedChar);
+        return ($this->expectedChecksumLetter() === $this->checksumLetter());
     }
 
     public static function create($code)

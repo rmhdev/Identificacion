@@ -46,6 +46,7 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array("1111111G"),
             array("A1111111G"),
             array("X11111111"),
+            array("X1111111A"),
         );
     }
 

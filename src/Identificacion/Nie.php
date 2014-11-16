@@ -18,7 +18,7 @@ class Nie extends IdentityAbstract implements IdentityInterface
             return false;
         }
 
-        return true;
+        return ($this->expectedChecksumLetter() === $this->checksumLetter());
     }
 
     private function hasCorrectInitialLetter()
