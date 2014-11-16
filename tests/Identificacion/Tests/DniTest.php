@@ -140,7 +140,7 @@ class DniIdentityTest extends AbstractIdentityTest
 
     /**
      * @dataProvider incorrectLetterProvider
-     * @expectedException \Identificacion\Exception\InvalidVerificationException
+     * @expectedException \Identificacion\Exception\InvalidChecksumException
      * @param $code
      */
     public function testCreateDniWithIncorrectLetterMustThrowException($code)

@@ -2,7 +2,7 @@
 
 namespace Identificacion;
 
-use Identificacion\Exception\InvalidVerificationException;
+use Identificacion\Exception\InvalidChecksumException;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\ParameterNotFoundException;
 
@@ -30,7 +30,7 @@ class Dni extends IdentityAbstract implements IdentityInterface
             throw new LengthException();
         }
         if ($dni->expectedChecksumLetter() !== $dni->checksumLetter()) {
-            throw new InvalidVerificationException();
+            throw new InvalidChecksumException();
         }
 
         return $dni;

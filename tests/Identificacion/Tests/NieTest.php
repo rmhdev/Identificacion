@@ -175,4 +175,23 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array("123456789X"),
         );
     }
+
+    /**
+     * @dataProvider incorrectLetterProvider
+     * @expectedException \Identificacion\Exception\InvalidChecksumException
+     * @param $code
+     */
+    public function testCreateNieWithIncorrectLetterMustThrowException($code)
+    {
+        Nie::create($code);
+    }
+
+    public function incorrectLetterProvider()
+    {
+        return array(
+            array("X1111111A"),
+            array("X1111111B"),
+            array("X1111111C"),
+        );
+    }
 }

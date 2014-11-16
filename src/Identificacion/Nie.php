@@ -2,6 +2,7 @@
 
 namespace Identificacion;
 
+use Identificacion\Exception\InvalidChecksumException;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\ParameterNotFoundException;
 
@@ -89,6 +90,9 @@ class Nie extends IdentityAbstract implements IdentityInterface
         }
         if (self::LENGTH !== strlen($nie->__toString())) {
             throw new LengthException();
+        }
+        if ($nie->expectedChecksumLetter() !== $nie->checksumLetter()) {
+            throw new InvalidChecksumException();
         }
 
         return $nie;

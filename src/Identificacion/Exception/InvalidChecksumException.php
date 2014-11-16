@@ -2,7 +2,7 @@
 
 namespace Identificacion\Exception;
 
-class InvalidVerificationException extends Exception
+class InvalidChecksumException extends Exception
 {
     
 }
