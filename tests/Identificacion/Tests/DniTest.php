@@ -4,20 +4,17 @@ namespace Identificacion\Tests;
 
 use Identificacion\Dni;
 
-class DniTests extends \PHPUnit_Framework_TestCase
+class DniIdentityTest extends AbstractIdentityTest
 {
     /**
-     * @dataProvider getCorrectDniProvider
-     * @param $actual
+     * {@inheritDoc}
      */
-    public function testCorrectDniMustBeValid($actual)
+    protected function createIdentity($code)
     {
-        $dni = new Dni($actual);
-
-        $this->assertTrue($dni->isValid());
+        return new Dni($code);
     }
 
-    public function getCorrectDniProvider()
+    public function getCorrectIdentityProvider()
     {
         return array(
             array("12345678z"),
@@ -27,18 +24,7 @@ class DniTests extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @dataProvider getIncorrectDniProvider
-     * @param $actual
-     */
-    public function testIncorrectDniMustBeInvalid($actual)
-    {
-        $dni = new Dni($actual);
-
-        $this->assertFalse($dni->isValid());
-    }
-
-    public function getIncorrectDniProvider()
+    public function getIncorrectIdentityProvider()
     {
         return array(
             array(null),
@@ -52,18 +38,6 @@ class DniTests extends \PHPUnit_Framework_TestCase
             array("14s00000z"),
             array("0014s000z"),
         );
-    }
-
-    /**
-     * @dataProvider getToStringProvider
-     * @param string $expected
-     * @param string $actual
-     */
-    public function testToStringMustReturnCode($expected, $actual)
-    {
-        $dni = new Dni($actual);
-
-        $this->assertEquals($expected, $dni->__toString());
     }
 
     public function getToStringProvider()
@@ -87,19 +61,7 @@ class DniTests extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @dataProvider getChecksumLetterFromDniProvider
-     * @param string $expected
-     * @param string $code
-     */
-    public function testChecksumLetterFromDniMustReturnLetter($expected, $code)
-    {
-        $dni = new Dni($code);
-
-        $this->assertEquals($expected, $dni->checksumLetter());
-    }
-
-    public function getChecksumLetterFromDniProvider()
+    public function getChecksumLetterProvider()
     {
         return array(
             array("Z"   , "12345678Z"),
@@ -108,19 +70,7 @@ class DniTests extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @dataProvider getExpectedChecksumLetterFromDniProvider
-     * @param string $expected
-     * @param string $code
-     */
-    public function testExpectedChecksumLetterFrmDniMustReturnDni($expected, $code)
-    {
-        $dni = new Dni($code);
-
-        $this->assertEquals($expected, $dni->expectedChecksumLetter());
-    }
-
-    public function getExpectedChecksumLetterFromDniProvider()
+    public function getExpectedChecksumLetterProvider()
     {
         return array(
             array("Z", "12345678"),

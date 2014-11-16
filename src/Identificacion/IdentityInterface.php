@@ -5,6 +5,11 @@ namespace Identificacion;
 interface IdentityInterface
 {
     /**
+     * @return string
+     */
+    public function __toString();
+
+    /**
      * @return bool
      */
     public function isValid();
