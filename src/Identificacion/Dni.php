@@ -65,8 +65,8 @@ class Dni extends IdentityAbstract implements IdentityInterface
         if (!$this->hasCorrectLength() || !$this->isLastCharAlpha()) {
             return false;
         }
-        $lastChar = $this->getLetter();
-        $expectedChar = $this->expectedLetter();
+        $lastChar = $this->checksumLetter();
+        $expectedChar = $this->expectedChecksumLetter();
 
         return ($lastChar === $expectedChar);
     }
@@ -76,7 +76,7 @@ class Dni extends IdentityAbstract implements IdentityInterface
         return (strlen($this->getCode()) == self::LENGTH);
     }
 
-    public function getLetter()
+    public function checksumLetter()
     {
         if ($this->isLastCharAlpha()) {
             $code = $this->getCode();
@@ -98,7 +98,7 @@ class Dni extends IdentityAbstract implements IdentityInterface
         return ctype_alpha($lastChar);
     }
 
-    public function expectedLetter()
+    public function expectedChecksumLetter()
     {
         $number = (int) $this->stripNumber();
         $dirtyNumber = (int) preg_replace('/[^0-9]/', 9, $this->stripNumber());
@@ -129,7 +129,7 @@ class Dni extends IdentityAbstract implements IdentityInterface
         if (Dni::LENGTH !== strlen($dni->__toString())) {
             throw new LengthException();
         }
-        if ($dni->expectedLetter() !== $dni->getLetter()) {
+        if ($dni->expectedChecksumLetter() !== $dni->checksumLetter()) {
             throw new InvalidVerificationException();
         }
 

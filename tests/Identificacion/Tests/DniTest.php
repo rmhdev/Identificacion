@@ -88,18 +88,18 @@ class DniTests extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getLetterFromDniProvider
+     * @dataProvider getChecksumLetterFromDniProvider
      * @param string $expected
      * @param string $code
      */
-    public function testGetLetterFromDniMustReturnLetter($expected, $code)
+    public function testChecksumLetterFromDniMustReturnLetter($expected, $code)
     {
         $dni = new Dni($code);
 
-        $this->assertEquals($expected, $dni->getLetter());
+        $this->assertEquals($expected, $dni->checksumLetter());
     }
 
-    public function getLetterFromDniProvider()
+    public function getChecksumLetterFromDniProvider()
     {
         return array(
             array("Z"   , "12345678Z"),
@@ -109,18 +109,18 @@ class DniTests extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getExpectedLetterFromDniProvider
+     * @dataProvider getExpectedChecksumLetterFromDniProvider
      * @param string $expected
      * @param string $code
      */
-    public function testExpectedLetterFrmDniMustReturnDni($expected, $code)
+    public function testExpectedChecksumLetterFrmDniMustReturnDni($expected, $code)
     {
         $dni = new Dni($code);
 
-        $this->assertEquals($expected, $dni->expectedLetter());
+        $this->assertEquals($expected, $dni->expectedChecksumLetter());
     }
 
-    public function getExpectedLetterFromDniProvider()
+    public function getExpectedChecksumLetterFromDniProvider()
     {
         return array(
             array("Z", "12345678"),

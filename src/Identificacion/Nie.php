@@ -5,7 +5,7 @@ namespace Identificacion;
 class Nie extends IdentityAbstract implements IdentityInterface
 {
     const LENGTH = 9;
-    const INITIAL_LETTERS = "xyz";
+    const INITIAL_LETTERS = "XYZ";
 
     public function __construct($code = null)
     {
@@ -42,6 +42,6 @@ class Nie extends IdentityAbstract implements IdentityInterface
         }
         $code = $this->getCode();
 
-        return strtolower($code[0]);
+        return strtoupper($code[0]);
     }
 }
