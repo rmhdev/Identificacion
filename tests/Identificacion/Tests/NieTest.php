@@ -8,6 +8,7 @@ class NieTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getCorrectNieProvider
+     * @param $value
      */
     public function testCorrectNieMustBeValid($value)
     {
@@ -25,6 +26,7 @@ class NieTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getIncorrectNieProvider
+     * @param $value
      */
     public function testIncorrectNieMustBeInvalid($value)
     {
@@ -37,6 +39,8 @@ class NieTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
+            array(""),
+            array("1111111G"),
         );
     }
 }

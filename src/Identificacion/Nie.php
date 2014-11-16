@@ -16,7 +16,12 @@ class Nie implements IdentityInterface
      */
     public function isValid()
     {
-        return $this->getCode() ? true : false;
+        if (strlen($this->getCode()) != 9) {
+
+            return false;
+        }
+
+        return true;
     }
 
     private function getCode()
