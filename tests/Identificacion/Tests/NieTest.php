@@ -46,4 +46,25 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array("A1111111G"),
         );
     }
+
+    /**
+     * @dataProvider getChecksumLetterProvider
+     * @param string $expected
+     * @param string $code
+     */
+    public function testChecksumLetterFromDniMustReturnLetter($expected, $code)
+    {
+        $nie = new Nie($code);
+
+        $this->assertEquals($expected, $nie->checksumLetter());
+    }
+
+    public function getChecksumLetterProvider()
+    {
+        return array(
+            array("G"   , "X1111111G"),
+            array("H"   , "Y1111111H"),
+            array(""    , "X11111111"),
+        );
+    }
 }
