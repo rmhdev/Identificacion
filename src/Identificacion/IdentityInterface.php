@@ -23,4 +23,10 @@ interface IdentityInterface
      * @return string
      */
     public function expectedChecksumLetter();
+
+    /**
+     * @param string $identity
+     * @return IdentityInterface
+     */
+    public static function create($identity);
 }

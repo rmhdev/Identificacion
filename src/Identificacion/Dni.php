@@ -20,9 +20,12 @@ class Dni extends IdentityAbstract implements IdentityInterface
         return ($this->expectedChecksumLetter() === $this->checksumLetter());
     }
 
-    public static function create($code)
+    /**
+     * {@inheritDoc}
+     */
+    public static function create($identity)
     {
-        $dni = new Dni($code);
+        $dni = new Dni($identity);
         if ("" === $dni->__toString()) {
             throw new ParameterNotFoundException();
         }

@@ -89,9 +89,12 @@ class Nie extends IdentityAbstract implements IdentityInterface
         return true;
     }
 
-    public static function create($code)
+    /**
+     * {@inheritDoc}
+     */
+    public static function create($identity)
     {
-        $nie = new Nie($code);
+        $nie = new Nie($identity);
         if ("" === $nie->__toString()) {
             throw new ParameterNotFoundException();
         }
