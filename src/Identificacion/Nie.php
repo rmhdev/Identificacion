@@ -44,17 +44,17 @@ class Nie extends IdentityAbstract implements IdentityInterface
      */
     public function getInitialLetter()
     {
-        if (!strlen($this->getCode())) {
+        if (!strlen($this->getIdentity())) {
             return "";
         }
-        $code = $this->getCode();
+        $identity = $this->getIdentity();
 
-        return strtoupper($code[0]);
+        return strtoupper($identity[0]);
     }
 
-    protected function rawCodeWithoutChecksumLetter()
+    protected function rawIdentityWithoutChecksumLetter()
     {
-        $raw = parent::rawCodeWithoutChecksumLetter();
+        $raw = parent::rawIdentityWithoutChecksumLetter();
         if ($this->hasCorrectInitialLetter()) {
             $raw = array_search(
                     $this->getInitialLetter(),
@@ -65,9 +65,9 @@ class Nie extends IdentityAbstract implements IdentityInterface
         return $raw;
     }
 
-    protected function fillCode()
+    protected function fillIdentityWithZeros()
     {
-        if ($this->isEmptyCode()) {
+        if ($this->isEmptyIdentity()) {
             return false;
         }
         $expectedLength = self::LENGTH - 2;
@@ -77,13 +77,13 @@ class Nie extends IdentityAbstract implements IdentityInterface
         $initialLetter = $this->hasCorrectInitialLetter() ?
             $this->getInitialLetter() :
             "";
-        $codeWithoutInitialLetter = substr(
-            $this->getCode(),
+        $identityWithoutInitialLetter = substr(
+            $this->getIdentity(),
             $this->hasCorrectInitialLetter() ? 1 : 0
         );
-        $this->setCode(
+        $this->setIdentity(
             $initialLetter .
-            str_pad($codeWithoutInitialLetter, $expectedLength, "0", STR_PAD_LEFT)
+            str_pad($identityWithoutInitialLetter, $expectedLength, "0", STR_PAD_LEFT)
         );
 
         return true;

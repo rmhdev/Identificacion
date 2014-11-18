@@ -9,7 +9,7 @@ abstract class IdentityAbstract implements IdentityInterface
     /**
      * @var string
      */
-    private $code;
+    private $identity;
 
     private static $letters = array(
         "T", "R", "W", "A", "G", "M", "Y", "F",
@@ -18,40 +18,40 @@ abstract class IdentityAbstract implements IdentityInterface
     );
 
     /**
-     * @param string $code
+     * @param string $identity
      */
-    public function __construct($code = "")
+    public function __construct($identity = "")
     {
-        $this->setCode($code);
-        if ($this->cleanCode()) {
-            $this->fillCode();
+        $this->setIdentity($identity);
+        if ($this->cleanIdentity()) {
+            $this->fillIdentityWithZeros();
         }
     }
 
-    private function cleanCode()
+    private function cleanIdentity()
     {
-        if ($this->isEmptyCode()) {
+        if ($this->isEmptyIdentity()) {
             return false;
         }
-        $this->setCode(
+        $this->setIdentity(
             strtoupper(
-                preg_replace('/[^a-zA-Z0-9]/', '', $this->getCode())
+                preg_replace('/[^a-zA-Z0-9]/', '', $this->getIdentity())
             )
         );
 
         return true;
     }
 
-    protected function fillCode()
+    protected function fillIdentityWithZeros()
     {
-        if ($this->isEmptyCode()) {
+        if ($this->isEmptyIdentity()) {
             return false;
         }
         $expectedLength = self::LENGTH - 1;
         if ($this->isLastCharAlpha()) {
             $expectedLength += 1;
         }
-        $this->setCode(str_pad($this->getCode(), $expectedLength, "0", STR_PAD_LEFT));
+        $this->setIdentity(str_pad($this->getIdentity(), $expectedLength, "0", STR_PAD_LEFT));
 
         return true;
     }
@@ -61,17 +61,17 @@ abstract class IdentityAbstract implements IdentityInterface
      */
     public function __toString()
     {
-        return $this->getCode();
+        return $this->getIdentity();
     }
 
-    protected function setCode($code)
+    protected function setIdentity($identity)
     {
-        $this->code = (string) $code;
+        $this->identity = (string) $identity;
     }
 
-    protected function getCode()
+    protected function getIdentity()
     {
-        return $this->code;
+        return $this->identity;
     }
 
     /**
@@ -80,9 +80,9 @@ abstract class IdentityAbstract implements IdentityInterface
     public function checksumLetter()
     {
         if ($this->isLastCharAlpha()) {
-            $code = $this->getCode();
+            $identity = $this->getIdentity();
 
-            return $code[strlen($code) - 1];
+            return $identity[strlen($identity) - 1];
         }
 
         return "";
@@ -90,18 +90,18 @@ abstract class IdentityAbstract implements IdentityInterface
 
     protected function isLastCharAlpha()
     {
-        if ($this->isEmptyCode()) {
+        if ($this->isEmptyIdentity()) {
             return false;
         }
-        $code = $this->getCode();
-        $lastChar = $code[strlen($code) - 1];
+        $identity = $this->getIdentity();
+        $lastChar = $identity[strlen($identity) - 1];
 
         return ctype_alpha($lastChar);
     }
 
-    protected function isEmptyCode()
+    protected function isEmptyIdentity()
     {
-        return ($this->getCode() === "");
+        return ($this->getIdentity() === "");
     }
 
     /**
@@ -120,8 +120,8 @@ abstract class IdentityAbstract implements IdentityInterface
 
     protected function stripNumber()
     {
-        $number = (int) $this->rawCodeWithoutChecksumLetter();
-        $dirtyNumber = (int) preg_replace('/[^0-9]/', 9, $this->rawCodeWithoutChecksumLetter());
+        $number = (int) $this->rawIdentityWithoutChecksumLetter();
+        $dirtyNumber = (int) preg_replace('/[^0-9]/', 9, $this->rawIdentityWithoutChecksumLetter());
         if ($number != $dirtyNumber) {
             return false;
         }
@@ -129,18 +129,18 @@ abstract class IdentityAbstract implements IdentityInterface
         return $number;
     }
 
-    protected function rawCodeWithoutChecksumLetter()
+    protected function rawIdentityWithoutChecksumLetter()
     {
         $expectedLength = self::LENGTH;
         if ($this->isLastCharAlpha()) {
             $expectedLength -= 1;
         }
 
-        return substr($this->getCode(), 0, $expectedLength);
+        return substr($this->getIdentity(), 0, $expectedLength);
     }
 
     protected function hasCorrectLength()
     {
-        return (strlen($this->getCode()) == self::LENGTH);
+        return (strlen($this->getIdentity()) == self::LENGTH);
     }
 }
