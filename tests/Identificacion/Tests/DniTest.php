@@ -92,7 +92,6 @@ class DniIdentityTest extends AbstractIdentityTest
         );
     }
 
-
     public function testCreateCorrectDniMustReturnDni()
     {
         $dni = Dni::create("12345678z");

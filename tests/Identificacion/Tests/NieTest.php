@@ -4,20 +4,17 @@ namespace Identificacion\Tests;
 
 use Identificacion\Nie;
 
-class NieTest extends \PHPUnit_Framework_TestCase
+class NieTest extends AbstractIdentityTest
 {
     /**
-     * @dataProvider getCorrectNieProvider
-     * @param $value
+     * {@inheritDoc}
      */
-    public function testCorrectNieMustBeValid($value)
+    protected function createIdentity($code)
     {
-        $nie = new Nie($value);
-
-        $this->assertTrue($nie->isValid());
+        return new Nie($code);
     }
 
-    public function getCorrectNieProvider()
+    public function getCorrectIdentityProvider()
     {
         return array(
             array("X1111111G"),
@@ -27,18 +24,8 @@ class NieTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @dataProvider getIncorrectNieProvider
-     * @param $value
-     */
-    public function testIncorrectNieMustBeInvalid($value)
-    {
-        $nie = new Nie($value);
 
-        $this->assertFalse($nie->isValid());
-    }
-
-    public function getIncorrectNieProvider()
+    public function getIncorrectIdentityProvider()
     {
         return array(
             array(null),
@@ -50,18 +37,6 @@ class NieTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @dataProvider getChecksumLetterProvider
-     * @param string $expected
-     * @param string $code
-     */
-    public function testChecksumLetterFromDniMustReturnLetter($expected, $code)
-    {
-        $nie = new Nie($code);
-
-        $this->assertEquals($expected, $nie->checksumLetter());
-    }
-
     public function getChecksumLetterProvider()
     {
         return array(
@@ -69,18 +44,6 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array("H"   , "Y1111111H"),
             array(""    , "X11111111"),
         );
-    }
-
-    /**
-     * @dataProvider getExpectedChecksumLetterProvider
-     * @param string $expected
-     * @param string $code
-     */
-    public function testExpectedChecksumLetterMustReturnLetter($expected, $code)
-    {
-        $nie = new Nie($code);
-
-        $this->assertEquals($expected, $nie->expectedChecksumLetter());
     }
 
     public function getExpectedChecksumLetterProvider()
@@ -102,18 +65,6 @@ class NieTest extends \PHPUnit_Framework_TestCase
             array("C", "X2300020"), array("K", "X2300021"),
             array("E", "X2300022"),
         );
-    }
-
-    /**
-     * @dataProvider getToStringProvider
-     * @param string $expected
-     * @param string $actual
-     */
-    public function testToStringMustReturnCode($expected, $actual)
-    {
-        $dni = new Nie($actual);
-
-        $this->assertEquals($expected, $dni->__toString());
     }
 
     public function getToStringProvider()
