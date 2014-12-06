@@ -45,4 +45,23 @@ class NifTest extends PHPUnit_Framework_TestCase
             array("12345678Z", "12345678z"),
         );
     }
+
+    /**
+     * @dataProvider getIncorrectIdentityProvider
+     * @param $value
+     */
+    public function testIncorrectIdentityMustBeInvalid($value)
+    {
+        $nif = new Nif($value);
+
+        $this->assertFalse($nif->isValid());
+    }
+
+    public function getIncorrectIdentityProvider()
+    {
+        return array(
+            array(""),
+            array(null),
+        );
+    }
 }

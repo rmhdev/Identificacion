@@ -18,6 +18,6 @@ class Nif
 
     public function isValid()
     {
-        return true;
+        return strlen($this->code) === 9;
     }
 }
