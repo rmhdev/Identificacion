@@ -7,9 +7,21 @@ use PHPUnit_Framework_TestCase;
 
 class NifTest extends PHPUnit_Framework_TestCase
 {
-    public function testCorrectDniMustBeValidNif()
+    /**
+     * @dataProvider correctDniProvider
+     * @param $value
+     */
+    public function testCorrectDniMustBeValidNif($value)
     {
-        $nif = new Nif("12345678z");
+        $nif = new Nif($value);
 
-        $this->assertTrue($nif->isValid());    }
+        $this->assertTrue($nif->isValid());
+    }
+
+    public function correctDniProvider()
+    {
+        return array(
+            array("12345678z"),
+        );
+    }
 }
