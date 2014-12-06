@@ -25,10 +25,24 @@ class NifTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testToStringMustReturnCode()
+    /**
+     * @dataProvider toStringProvider
+     * @param $expected
+     * @param $value
+     */
+    public function testToStringMustReturnCode($expected, $value)
     {
-        $nif = new Nif("");
+        $nif = new Nif($value);
 
-        $this->assertEquals("", $nif->__toString());
+        $this->assertEquals($expected, $nif->__toString());
+    }
+
+    public function toStringProvider()
+    {
+        return array(
+            array("", ""),
+            array("", null),
+            array("12345678Z", "12345678z"),
+        );
     }
 }
