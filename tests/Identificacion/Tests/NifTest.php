@@ -11,7 +11,7 @@ class NifTest extends PHPUnit_Framework_TestCase
      * @dataProvider correctDniProvider
      * @param $value
      */
-    public function testCorrectDniMustBeValidNif($value)
+    public function testCorrectDniMustBeValid($value)
     {
         $nif = new Nif($value);
 
@@ -23,5 +23,12 @@ class NifTest extends PHPUnit_Framework_TestCase
         return array(
             array("12345678z"),
         );
+    }
+
+    public function testToStringMustReturnCode()
+    {
+        $nif = new Nif("");
+
+        $this->assertEquals("", $nif->__toString());
     }
 }
