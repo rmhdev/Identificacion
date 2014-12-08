@@ -40,7 +40,13 @@ class NifCode
         if (self::LENGTH < strlen($number)) {
             throw new LengthException();
         }
+        $this->number = str_pad($number, self::LENGTH, "0", STR_PAD_LEFT);
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return sprintf("%s%s", $this->letter, $this->number);
     }
 }

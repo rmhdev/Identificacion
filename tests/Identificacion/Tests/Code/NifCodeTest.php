@@ -32,4 +32,26 @@ class NifCodeTest extends \PHPUnit_Framework_TestCase
             array("I"), array("O"), array("Ñ"),
         );
     }
+
+    /**
+     * @dataProvider tooShortCodeProvider
+     * @param $expected
+     * @param $value
+     */
+    public function testTooShortCodeMustBeFilledWithLeadingZeros($expected, $value)
+    {
+        $code = new NifCode("A", $value);
+
+        $this->assertEquals("A" . $expected, $code->__toString());
+    }
+
+    public function tooShortCodeProvider()
+    {
+        return array(
+            array("0000002", "2"),
+            array("0000002", "02"),
+            array("0000123", "123"),
+            array("0000000", ""),
+        );
+    }
 }
