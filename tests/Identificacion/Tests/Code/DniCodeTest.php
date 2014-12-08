@@ -39,7 +39,7 @@ class DniIdentityTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider nanCodeProvider
-     * @expectedException \Identificacion\Exception\UnexpectedValueException
+     * @expectedException \Identificacion\Exception\InvalidNumberException
      * @param $value
      *
      */

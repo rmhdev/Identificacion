@@ -3,7 +3,7 @@
 namespace Identificacion\Code;
 
 use Identificacion\Exception\LengthException;
-use Identificacion\Exception\UnexpectedValueException;
+use Identificacion\Exception\InvalidNumberException;
 
 class DniCode implements CodeInterface
 {
@@ -26,7 +26,7 @@ class DniCode implements CodeInterface
     {
         $number = preg_replace('/[^a-zA-Z0-9]/', '', $number);
         if (preg_match('/[^0-9]/', $number)) {
-            throw new UnexpectedValueException();
+            throw new InvalidNumberException();
         }
         if (self::LENGTH < strlen($number)) {
             throw new LengthException();

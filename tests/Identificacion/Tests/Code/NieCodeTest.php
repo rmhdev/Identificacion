@@ -16,7 +16,7 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider unexpectedLetterProvider
-     * @expectedException \Identificacion\Exception\UnexpectedValueException
+     * @expectedException \Identificacion\Exception\UnexpectedLetterException
      * @param string $value
      */
     public function testUnexpectedLetterMustThrowException($value)
@@ -57,7 +57,7 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider nanCodeProvider
-     * @expectedException \Identificacion\Exception\UnexpectedValueException
+     * @expectedException \Identificacion\Exception\InvalidNumberException
      * @param $value
      *
      */

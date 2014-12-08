@@ -3,7 +3,8 @@
 namespace Identificacion\Code;
 
 use Identificacion\Exception\LengthException;
-use Identificacion\Exception\UnexpectedValueException;
+use Identificacion\Exception\UnexpectedLetterException;
+use Identificacion\Exception\InvalidNumberException;
 
 class NieCode implements CodeInterface
 {
@@ -27,7 +28,7 @@ class NieCode implements CodeInterface
             preg_replace('/[^a-zA-Z]/', '', $letter)
         );
         if (!in_array(strtoupper($letter), self::$letters)) {
-            throw new UnexpectedValueException();
+            throw new UnexpectedLetterException();
         }
         $this->letter = $letter;
 
@@ -38,7 +39,7 @@ class NieCode implements CodeInterface
     {
         $number = preg_replace('/[^a-zA-Z0-9]/', '', $number);
         if (preg_match('/[^0-9]/', $number)) {
-            throw new UnexpectedValueException();
+            throw new InvalidNumberException();
         }
         if (self::LENGTH < strlen($number)) {
             throw new LengthException();
