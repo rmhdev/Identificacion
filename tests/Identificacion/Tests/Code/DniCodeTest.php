@@ -20,7 +20,7 @@ class DniIdentityTest extends \PHPUnit_Framework_TestCase
      * @param string $expected
      * @param string $value
      */
-    public function testTooShortCodeMustBeFilledWithTrailingZeros($expected, $value)
+    public function testTooShortCodeMustBeFilledWithLeadingZeros($expected, $value)
     {
         $dniCode = new DniCode($value);
 

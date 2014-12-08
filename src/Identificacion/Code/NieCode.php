@@ -34,6 +34,11 @@ class NieCode
             throw new LengthException();
         }
 
-        $this->code = $code;
+        $this->code = str_pad($code, self::LENGTH, "0", STR_PAD_LEFT);
+    }
+
+    public function __toString()
+    {
+        return sprintf("%s%s", $this->letter, $this->code);
     }
 }

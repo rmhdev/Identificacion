@@ -33,4 +33,26 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @dataProvider tooShortCodeProvider
+     * @param $expected
+     * @param $value
+     */
+    public function testTooShortCodeMustBeFilledWithLeadingZeros($expected, $value)
+    {
+        $nieCode = new NieCode("X", $value);
+
+        $this->assertEquals("X" . $expected, $nieCode->__toString());
+    }
+
+    public function tooShortCodeProvider()
+    {
+        return array(
+            array("0000002", "2"),
+            array("0000002", "02"),
+            array("0000123", "123"),
+            array("0000000", ""),
+        );
+    }
+
 }
