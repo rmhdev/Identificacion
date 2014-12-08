@@ -36,11 +36,17 @@ class DniCode implements CodeInterface
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function letter()
     {
         return "";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function number()
     {
         return $this->number;

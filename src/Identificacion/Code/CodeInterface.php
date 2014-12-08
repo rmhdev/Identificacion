@@ -12,5 +12,15 @@ interface CodeInterface
     /**
      * @return string
      */
+    public function letter();
+
+    /**
+     * @return string
+     */
+    public function number();
+
+    /**
+     * @return string
+     */
     public function checksum();
 }

@@ -48,11 +48,17 @@ class NieCode implements CodeInterface
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function letter()
     {
         return $this->letter;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function number()
     {
         return $this->number;
