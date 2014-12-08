@@ -24,6 +24,7 @@ class DniCode implements CodeInterface
 
     protected function setNumber($number)
     {
+        $number = preg_replace('/[^a-zA-Z0-9]/', '', $number);
         if (preg_match('/[^0-9]/', $number)) {
             throw new UnexpectedValueException();
         }

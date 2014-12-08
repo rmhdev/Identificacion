@@ -53,8 +53,6 @@ class DniIdentityTest extends \PHPUnit_Framework_TestCase
         return array(
             array("a123"),
             array("a"),
-            array(" "),
-            array("1\t3"),
         );
     }
 
@@ -98,10 +96,26 @@ class DniIdentityTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($dniCode->letter());
     }
 
-    public function testNumberMustReturnCode()
+    /**
+     * @dataProvider numberProvider
+     * @param $expected
+     * @param $value
+     */
+    public function testNumberMustReturnCode($expected, $value)
     {
-        $dniCode = new DniCode("12345678");
+        $code = new DniCode($value);
 
-        $this->assertEquals("12345678", $dniCode->number());
+        $this->assertEquals($expected, $code->number());
     }
+
+    public function numberProvider()
+    {
+        return array(
+            array("12345678", "12345678"),
+            array("12345678", "1.234-5678"),
+            array("12345678", "1\n234\t5678"),
+            array("00000008", "8"),
+        );
+    }
+
 }

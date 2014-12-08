@@ -118,18 +118,18 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider nieNumberProvider
+     * @dataProvider numberProvider
      * @param $expected
      * @param $value
      */
     public function testNumberMustReturnCode($expected, $value)
     {
-        $dniCode = new NieCode("X", $value);
+        $code = new NieCode("X", $value);
 
-        $this->assertEquals($expected, $dniCode->number());
+        $this->assertEquals($expected, $code->number());
     }
 
-    public function nieNumberProvider()
+    public function numberProvider()
     {
         return array(
             array("1234567", "1234567"),
