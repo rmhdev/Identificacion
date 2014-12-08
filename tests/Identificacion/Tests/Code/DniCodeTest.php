@@ -34,7 +34,26 @@ class DniIdentityTest extends \PHPUnit_Framework_TestCase
             array("00000123", "0123"),
             array("00000000", ""),
             array("00000000", null),
+        );
+    }
 
+    /**
+     * @dataProvider nanCodeProvider
+     * @expectedException \Identificacion\Exception\UnexpectedValueException
+     * @param $value
+     *
+     */
+    public function testNanCodeMustThrowException($value)
+    {
+        new DniCode($value);
+    }
+
+    public function nanCodeProvider()
+    {
+        return array(
+            array("a123"),
+            array("a"),
+            array(" "),
         );
     }
 }

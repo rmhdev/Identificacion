@@ -3,6 +3,7 @@
 namespace Identificacion\Code;
 
 use Identificacion\Exception\LengthException;
+use Identificacion\Exception\UnexpectedValueException;
 
 class DniCode
 {
@@ -17,6 +18,10 @@ class DniCode
 
     protected function setCode($code)
     {
+        if (preg_match('/[^0-9]/', $code)) {
+            throw new UnexpectedValueException();
+        }
+        $code = preg_replace('/[^0-9]/', '', $code);
         if (self::LENGTH < strlen($code)) {
             throw new LengthException();
         }
