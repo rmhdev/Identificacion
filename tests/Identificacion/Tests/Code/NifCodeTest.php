@@ -54,4 +54,25 @@ class NifCodeTest extends \PHPUnit_Framework_TestCase
             array("0000000", ""),
         );
     }
+
+    /**
+     * @dataProvider nieLetterProvider
+     * @param $expected
+     * @param $value
+     */
+    public function testLetterMustReturnString($expected, $value)
+    {
+        $code = new NifCode($value, "1234567");
+
+        $this->assertEquals($expected, $code->letter());
+    }
+
+    public function nieLetterProvider()
+    {
+        return array(
+            array("A", "a"),
+            array("B", "B "),
+            array("C", "\tC\n"),
+        );
+    }
 }

@@ -27,7 +27,10 @@ class NifCode
 
     private function setLetter($letter)
     {
-        if (!in_array(strtoupper($letter), self::$letters)) {
+        $letter = strtoupper(
+            preg_replace('/[^a-zA-Z]/', '', $letter)
+        );
+        if (!in_array($letter, self::$letters)) {
             throw new UnexpectedLetterException();
         }
         $this->letter = $letter;
@@ -48,5 +51,10 @@ class NifCode
     public function __toString()
     {
         return sprintf("%s%s", $this->letter, $this->number);
+    }
+
+    public function letter()
+    {
+        return $this->letter;
     }
 }

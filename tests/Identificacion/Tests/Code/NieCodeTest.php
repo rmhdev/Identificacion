@@ -101,7 +101,7 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
      * @param $expected
      * @param $value
      */
-    public function testLetterMustReturnEmptyString($expected, $value)
+    public function testLetterMustReturnString($expected, $value)
     {
         $code = new NieCode($value, "1234567");
 
