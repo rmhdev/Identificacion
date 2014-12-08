@@ -54,6 +54,7 @@ class DniIdentityTest extends \PHPUnit_Framework_TestCase
             array("a123"),
             array("a"),
             array(" "),
+            array("1\t3"),
         );
     }
 }

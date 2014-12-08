@@ -32,7 +32,6 @@ class DniCode
 
     public function __toString()
     {
-
         return $this->code;
     }
 
