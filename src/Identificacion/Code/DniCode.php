@@ -15,37 +15,35 @@ class DniCode
         "Q", "V", "H", "L", "C", "K", "E"
     );
 
-    private $code;
+    private $number;
 
-    public function __construct($code)
+    public function __construct($number)
     {
-        $this->setCode($code);
+        $this->setNumber($number);
     }
 
-    protected function setCode($code)
+    protected function setNumber($number)
     {
-        if (preg_match('/[^0-9]/', $code)) {
+        if (preg_match('/[^0-9]/', $number)) {
             throw new UnexpectedValueException();
         }
-        if (self::LENGTH < strlen($code)) {
+        if (self::LENGTH < strlen($number)) {
             throw new LengthException();
         }
-        $this->code = str_pad($code, self::LENGTH, "0", STR_PAD_LEFT);
+        $this->number = str_pad($number, self::LENGTH, "0", STR_PAD_LEFT);
 
         return $this;
     }
 
     public function __toString()
     {
-        return $this->code;
+        return $this->number;
     }
 
     public function checksum()
     {
-        $mod = ((int) $this->code) % sizeof(self::$letters);
+        $mod = ((int) $this->number) % sizeof(self::$letters);
 
         return self::$letters[$mod];
     }
-
-
 }

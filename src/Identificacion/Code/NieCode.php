@@ -11,13 +11,14 @@ class NieCode
 
     private static $letters = array("X", "Y", "Z");
 
-    private $code;
+    private $number;
     private $letter;
 
-    public function __construct($letter, $code)
+    public function __construct($letter, $number)
     {
-        $this->setLetter($letter);
-        $this->setCode($code);
+        $this
+            ->setLetter($letter)
+            ->setNumber($number);
     }
 
     private function setLetter($letter)
@@ -26,22 +27,34 @@ class NieCode
             throw new UnexpectedValueException();
         }
         $this->letter = $letter;
+
+        return $this;
     }
 
-    private function setCode($code)
+    private function setNumber($number)
     {
-        if (preg_match('/[^0-9]/', $code)) {
+        if (preg_match('/[^0-9]/', $number)) {
             throw new UnexpectedValueException();
         }
-        if (self::LENGTH < strlen($code)) {
+        if (self::LENGTH < strlen($number)) {
             throw new LengthException();
         }
+        $this->number = str_pad($number, self::LENGTH, "0", STR_PAD_LEFT);
 
-        $this->code = str_pad($code, self::LENGTH, "0", STR_PAD_LEFT);
+        return $this;
     }
 
     public function __toString()
     {
-        return sprintf("%s%s", $this->letter, $this->code);
+        return sprintf("%s%s", $this->letter, $this->number);
+    }
+
+    public function checksum()
+    {
+        $position = array_search($this->letter, self::$letters);
+        $processedValue = ((string) $position) . $this->number;
+        $dniCode = new DniCode($processedValue);
+
+        return $dniCode->checksum();
     }
 }

@@ -76,4 +76,27 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @dataProvider checksumProvider
+     * @param $expected
+     * @param $letter
+     * @param $number
+     */
+    public function testChecksum($expected, $letter, $number)
+    {
+        $code = new NieCode($letter, $number);
+
+        $this->assertEquals($expected, $code->checksum());
+    }
+
+    public function checksumProvider()
+    {
+        return array(
+            array("G", "X", "1111111"),
+            array("H", "Y", "1111111"),
+            array("D", "Z", "1111111"),
+        );
+
+    }
+
 }
