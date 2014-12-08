@@ -55,4 +55,25 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @dataProvider nanCodeProvider
+     * @expectedException \Identificacion\Exception\UnexpectedValueException
+     * @param $value
+     *
+     */
+    public function testNanCodeMustThrowException($value)
+    {
+        new NieCode("X", $value);
+    }
+
+    public function nanCodeProvider()
+    {
+        return array(
+            array("a123"),
+            array("a"),
+            array(" "),
+            array("1\t3"),
+        );
+    }
+
 }

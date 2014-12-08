@@ -30,6 +30,9 @@ class NieCode
 
     private function setCode($code)
     {
+        if (preg_match('/[^0-9]/', $code)) {
+            throw new UnexpectedValueException();
+        }
         if (self::LENGTH < strlen($code)) {
             throw new LengthException();
         }
