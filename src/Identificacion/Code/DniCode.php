@@ -6,6 +6,8 @@ use Identificacion\Exception\LengthException;
 
 class DniCode
 {
+    const LENGTH = 8;
+
     private $code;
 
     public function __construct($code)
@@ -15,10 +17,10 @@ class DniCode
 
     protected function setCode($code)
     {
-        if (strlen($code) > 8) {
+        if (self::LENGTH < strlen($code)) {
             throw new LengthException();
         }
-        $this->code = str_pad($code, 8, "0", STR_PAD_LEFT);
+        $this->code = str_pad($code, self::LENGTH, "0", STR_PAD_LEFT);
 
         return $this;
     }
