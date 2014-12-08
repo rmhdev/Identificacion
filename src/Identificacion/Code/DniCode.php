@@ -9,6 +9,12 @@ class DniCode
 {
     const LENGTH = 8;
 
+    private static $letters = array(
+        "T", "R", "W", "A", "G", "M", "Y", "F",
+        "P", "D", "X", "B", "N", "J", "Z", "S",
+        "Q", "V", "H", "L", "C", "K", "E"
+    );
+
     private $code;
 
     public function __construct($code)
@@ -33,6 +39,13 @@ class DniCode
     public function __toString()
     {
         return $this->code;
+    }
+
+    public function checksum()
+    {
+        $mod = ((int) $this->code) % sizeof(self::$letters);
+
+        return self::$letters[$mod];
     }
 
 
