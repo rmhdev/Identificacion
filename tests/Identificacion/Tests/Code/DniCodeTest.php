@@ -12,6 +12,13 @@ class DniIdentityTest extends \PHPUnit_Framework_TestCase
      */
     public function testTooLongIdentityMustThrowException()
     {
-        $dniCode = new DniCode("123456789");
+        new DniCode("123456789");
+    }
+
+    public function testTooShortIdentityMustBeFilledWithTrailingZeros()
+    {
+        $dniCode = new DniCode("123");
+
+        $this->assertEquals("00000123", $dniCode->__toString());
     }
 }
