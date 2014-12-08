@@ -50,7 +50,7 @@ class DniCode implements CodeInterface
      */
     public function __toString()
     {
-        return $this->number;
+        return $this->number();
     }
 
     /**
@@ -58,7 +58,7 @@ class DniCode implements CodeInterface
      */
     public function checksum()
     {
-        $mod = ((int) $this->number) % sizeof(self::$letters);
+        $mod = ((int) $this->number()) % sizeof(self::$letters);
 
         return self::$letters[$mod];
     }
