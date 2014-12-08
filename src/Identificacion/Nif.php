@@ -4,25 +4,30 @@ namespace Identificacion;
 
 class Nif
 {
-    private $code;
+    private $identity;
 
-    public function __construct($code)
+    public function __construct($identity)
     {
-        $this->code = $code;
+        $this->identity = $identity;
     }
 
     public function __toString()
     {
-        return strtoupper($this->code);
+        return strtoupper($this->getIdentity());
     }
 
     public function isValid()
     {
-        return strlen($this->code) === 9;
+        return strlen($this->getIdentity()) === 9;
     }
 
     public function expectedChecksumLetter()
     {
         return "I";
+    }
+
+    protected function getIdentity()
+    {
+        return $this->identity;
     }
 }
