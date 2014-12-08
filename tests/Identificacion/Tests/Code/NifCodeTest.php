@@ -75,4 +75,25 @@ class NifCodeTest extends \PHPUnit_Framework_TestCase
             array("C", "\tC\n"),
         );
     }
+
+    /**
+     * @dataProvider numberProvider
+     * @param $expected
+     * @param $value
+     */
+    public function testNumberMustReturnCode($expected, $value)
+    {
+        $code = new NifCode("A", $value);
+
+        $this->assertEquals($expected, $code->number());
+    }
+
+    public function numberProvider()
+    {
+        return array(
+            array("1234567", "1234567"),
+            array("1234567", "1.234-567"),
+            array("1234567", "1\n234\t567"),
+        );
+    }
 }

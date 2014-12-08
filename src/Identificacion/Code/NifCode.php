@@ -40,6 +40,7 @@ class NifCode
 
     private function setNumber($number)
     {
+        $number = preg_replace('/[^a-zA-Z0-9]/', '', $number);
         if (self::LENGTH < strlen($number)) {
             throw new LengthException();
         }
@@ -56,5 +57,10 @@ class NifCode
     public function letter()
     {
         return $this->letter;
+    }
+
+    public function number()
+    {
+        return $this->number;
     }
 }
