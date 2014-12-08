@@ -20,4 +20,9 @@ class Nif
     {
         return strlen($this->code) === 9;
     }
+
+    public function expectedChecksumLetter()
+    {
+        return "I";
+    }
 }

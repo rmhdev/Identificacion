@@ -61,7 +61,27 @@ class NifTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array(""),
-            array(null),
+        );
+    }
+
+    /**
+     * @dataProvider expectedChecksumLetterProvider
+     * @param string $expected
+     * @param string $value
+     */
+    public function testExpectedChecksumLetterMustReturnLetter($expected, $value)
+    {
+        $nif = new Nif($value);
+
+        $this->assertEquals($expected, $nif->expectedChecksumLetter());
+    }
+
+    public function expectedChecksumLetterProvider()
+    {
+        return array(
+            array("I", "K11111111A"),
+            //array("H", "K22222222A"),
+            //array("G", "K33333333A"),
         );
     }
 }
