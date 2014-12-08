@@ -96,4 +96,23 @@ class NifCodeTest extends \PHPUnit_Framework_TestCase
             array("1234567", "1\n234\t567"),
         );
     }
+
+    /**
+     * @dataProvider nanCodeProvider
+     * @expectedException \Identificacion\Exception\InvalidNumberException
+     * @param $value
+     *
+     */
+    public function testNanCodeMustThrowException($value)
+    {
+        new NifCode("A", $value);
+    }
+
+    public function nanCodeProvider()
+    {
+        return array(
+            array("a123"),
+            array("a"),
+        );
+    }
 }

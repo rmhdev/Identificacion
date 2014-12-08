@@ -2,6 +2,7 @@
 
 namespace Identificacion\Code;
 
+use Identificacion\Exception\InvalidNumberException;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\UnexpectedLetterException;
 
@@ -41,6 +42,9 @@ class NifCode
     private function setNumber($number)
     {
         $number = preg_replace('/[^a-zA-Z0-9]/', '', $number);
+        if (preg_match('/[^0-9]/', $number)) {
+            throw new InvalidNumberException();
+        }
         if (self::LENGTH < strlen($number)) {
             throw new LengthException();
         }
