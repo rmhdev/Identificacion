@@ -89,6 +89,19 @@ class DniIdentityTest extends \PHPUnit_Framework_TestCase
             array("C", "23000020"), array("K", "23000021"),
             array("E", "23000022"),
         );
+    }
 
+    public function testLetterMustReturnEmtptyString()
+    {
+        $dniCode = new DniCode("12345678");
+
+        $this->assertEmpty($dniCode->letter());
+    }
+
+    public function testNumberMustReturnCode()
+    {
+        $dniCode = new DniCode("12345678");
+
+        $this->assertEquals("12345678", $dniCode->number());
     }
 }
