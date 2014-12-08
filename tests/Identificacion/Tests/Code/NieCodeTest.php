@@ -71,8 +71,6 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
         return array(
             array("a123"),
             array("a"),
-            array(" "),
-            array("1\t3"),
         );
     }
 
@@ -96,7 +94,48 @@ class NieCodeTest extends \PHPUnit_Framework_TestCase
             array("H", "Y", "1111111"),
             array("D", "Z", "1111111"),
         );
+    }
 
+    /**
+     * @dataProvider nieLetterProvider
+     * @param $expected
+     * @param $value
+     */
+    public function testLetterMustReturnEmptyString($expected, $value)
+    {
+        $code = new NieCode($value, "1234567");
+
+        $this->assertEquals($expected, $code->letter());
+    }
+
+    public function nieLetterProvider()
+    {
+        return array(
+            array("X", "x"),
+            array("Y", "Y "),
+            array("Z", "\tZ\n"),
+        );
+    }
+
+    /**
+     * @dataProvider nieNumberProvider
+     * @param $expected
+     * @param $value
+     */
+    public function testNumberMustReturnCode($expected, $value)
+    {
+        $dniCode = new NieCode("X", $value);
+
+        $this->assertEquals($expected, $dniCode->number());
+    }
+
+    public function nieNumberProvider()
+    {
+        return array(
+            array("1234567", "1234567"),
+            array("1234567", "1.234-567"),
+            array("1234567", "1\n234\t567"),
+        );
     }
 
 }

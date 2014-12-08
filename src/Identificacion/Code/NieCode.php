@@ -23,6 +23,9 @@ class NieCode implements CodeInterface
 
     private function setLetter($letter)
     {
+        $letter = strtoupper(
+            preg_replace('/[^a-zA-Z]/', '', $letter)
+        );
         if (!in_array(strtoupper($letter), self::$letters)) {
             throw new UnexpectedValueException();
         }
@@ -33,6 +36,7 @@ class NieCode implements CodeInterface
 
     private function setNumber($number)
     {
+        $number = preg_replace('/[^a-zA-Z0-9]/', '', $number);
         if (preg_match('/[^0-9]/', $number)) {
             throw new UnexpectedValueException();
         }
@@ -42,6 +46,16 @@ class NieCode implements CodeInterface
         $this->number = str_pad($number, self::LENGTH, "0", STR_PAD_LEFT);
 
         return $this;
+    }
+
+    public function letter()
+    {
+        return $this->letter;
+    }
+
+    public function number()
+    {
+        return $this->number;
     }
 
     /**
