@@ -115,4 +115,24 @@ class NifCodeTest extends \PHPUnit_Framework_TestCase
             array("a"),
         );
     }
+
+    /**
+     * @dataProvider checksumProvider
+     * @param $expected
+     * @param $letter
+     * @param $number
+     */
+    public function testChecksum($expected, $letter, $number)
+    {
+        $code = new NifCode($letter, $number);
+
+        $this->assertEquals($expected, $code->checksum());
+    }
+
+    public function checksumProvider()
+    {
+        return array(
+            array("G", "A", "1111111"),
+        );
+    }
 }

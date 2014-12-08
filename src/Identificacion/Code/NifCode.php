@@ -67,4 +67,32 @@ class NifCode
     {
         return $this->number;
     }
+
+    public function checksum()
+    {
+        $even = 0;
+        $odd = 0;
+        $values = str_split($this->number());
+        foreach ($values as $i=>$value) {
+            $value = (int) $value;
+            if (($i % 2) == 0) {
+                $even += $value;
+            } else {
+                $oddValue = $value * 2;
+                if ($oddValue > 9) {
+                    $total = 0;
+                    foreach (str_split((string) $oddValue) as $item) {
+                        $total += (int) $item;
+                    }
+                    $oddValue = $total;
+                }
+                $odd += $oddValue;
+            }
+        }
+        $sum = $even + $odd;
+        $controlNumber = 10 - $sum;
+
+        return "";
+    }
+
 }
