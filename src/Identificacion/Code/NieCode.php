@@ -5,7 +5,7 @@ namespace Identificacion\Code;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\UnexpectedValueException;
 
-class NieCode
+class NieCode implements CodeInterface
 {
     const LENGTH = 7;
 
@@ -44,11 +44,17 @@ class NieCode
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function __toString()
     {
         return sprintf("%s%s", $this->letter, $this->number);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function checksum()
     {
         $position = array_search($this->letter, self::$letters);

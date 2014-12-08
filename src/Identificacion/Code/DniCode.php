@@ -5,7 +5,7 @@ namespace Identificacion\Code;
 use Identificacion\Exception\LengthException;
 use Identificacion\Exception\UnexpectedValueException;
 
-class DniCode
+class DniCode implements CodeInterface
 {
     const LENGTH = 8;
 
@@ -35,11 +35,17 @@ class DniCode
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function __toString()
     {
         return $this->number;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function checksum()
     {
         $mod = ((int) $this->number) % sizeof(self::$letters);
