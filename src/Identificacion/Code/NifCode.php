@@ -82,15 +82,13 @@ class NifCode
     private function calculateChecksumNumber()
     {
         $sum = 0;
-        $values = str_split($this->number());
-        foreach ($values as $i=>$value) {
+        foreach (str_split($this->number()) as $i=>$value) {
             $value = (int) $value;
             if (($i % 2) == 0) {
-                $evenValue = $value * 2;
-                if ($evenValue > 9) {
-                    $evenValue = array_sum(str_split((string) $evenValue, 1));
+                $value *= 2;
+                if ($value > 9) {
+                    $value = array_sum(str_split((string) $value, 1));
                 }
-                $value = $evenValue;
             }
             $sum += $value;
         }
