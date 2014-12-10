@@ -74,8 +74,14 @@ class NifCode
 
     public function checksum()
     {
-        $even = 0;
-        $odd = 0;
+        $checksumNumber = $this->calculateChecksumNumber();
+
+        return self::$checksumLetters[$checksumNumber];
+    }
+
+    private function calculateChecksumNumber()
+    {
+        $sum = 0;
         $values = str_split($this->number());
         foreach ($values as $i=>$value) {
             $value = (int) $value;
@@ -84,18 +90,15 @@ class NifCode
                 if ($evenValue > 9) {
                     $evenValue = array_sum(str_split((string) $evenValue, 1));
                 }
-                $even += $evenValue;
-            } else {
-                $odd += $value;
+                $value = $evenValue;
             }
+            $sum += $value;
         }
-        $controlNumber = 0;
-        $sum = $even + $odd;
         if (($sum % 10) !== 0) {
-            $controlNumber = 10 - ($sum % 10);
+            return 10 - ($sum % 10);
         }
 
-        return self::$checksumLetters[$controlNumber];
+        return 0;
     }
 
 }
