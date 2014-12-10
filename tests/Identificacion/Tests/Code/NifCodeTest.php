@@ -133,6 +133,12 @@ class NifCodeTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array("I", "K", "1111111"),
+            array("J", "K", "0000000"),
+            array("H", "K", "2222222"),
+            array("G", "K", "3333333"),
+            array("F", "K", "4444444"),
+            array("A", "K", "5555555"),
+            array("B", "K", "0606060"),
         );
     }
 }
