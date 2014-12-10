@@ -16,6 +16,10 @@ class NifCode
         "N", "P", "Q", "R", "S", "U", "V", "W",
     );
 
+    private static $checksumLetters = array(
+        "J", "A", "B", "C", "D", "E", "F", "G", "H", "I"
+    );
+
     private $letter;
     private $number;
 
@@ -76,23 +80,22 @@ class NifCode
         foreach ($values as $i=>$value) {
             $value = (int) $value;
             if (($i % 2) == 0) {
-                $even += $value;
-            } else {
-                $oddValue = $value * 2;
-                if ($oddValue > 9) {
-                    $total = 0;
-                    foreach (str_split((string) $oddValue) as $item) {
-                        $total += (int) $item;
-                    }
-                    $oddValue = $total;
+                $evenValue = $value * 2;
+                if ($evenValue > 9) {
+                    $evenValue = array_sum(str_split((string) $evenValue, 1));
                 }
-                $odd += $oddValue;
+                $even += $evenValue;
+            } else {
+                $odd += $value;
             }
         }
+        $controlNumber = 0;
         $sum = $even + $odd;
-        $controlNumber = 10 - $sum;
+        if (($sum % 10) !== 0) {
+            $controlNumber = 10 - ($sum % 10);
+        }
 
-        return "";
+        return self::$checksumLetters[$controlNumber];
     }
 
 }

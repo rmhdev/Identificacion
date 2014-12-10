@@ -132,7 +132,7 @@ class NifCodeTest extends \PHPUnit_Framework_TestCase
     public function checksumProvider()
     {
         return array(
-            array("G", "A", "1111111"),
+            array("I", "K", "1111111"),
         );
     }
 }
